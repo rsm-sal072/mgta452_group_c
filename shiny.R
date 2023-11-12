@@ -65,17 +65,17 @@ ui <- fluidPage(
                       h3("** Predictive Analysis **"),
                       h5("1. *What will be the demographic makeup of major US cities in 10 years?* - Projecting future changes in ethnicity, age distribution, and migration patterns."),
                       h5("2. *How will the aging population affect the job market by 2030?* - Predicting shifts in employment sectors due to an increasing number of retirees."),
-                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added once we have access to the data")),
+                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added later")),
              tabPanel("Descriptive Analysis",
                       h3("** Descriptive Analysis **"),
                       h5("1. *Which state has the most unusual ratio of people to domestic pets?* - Investigating the correlation between human population and pet ownership."),
                       h5("2. *Is there a state where people have an unusually high number of hobbies or leisure activities?* - Analyzing census data on leisure activities and comparing across states."),
-                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added once we have access to the data")),
+                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added later")),
              tabPanel("Regression Analysis",
                       h3("** Regression Analysis **"),
                       h5("1. *Do states with higher numbers of pet owners have lower stress-related health issues?* - Exploring the correlation between pet ownership (from other sources) and health data from the census."),
                       h5("2. *Is there a relationship between the number of fast-food restaurants in an area and the number of single-person households?* - Combining census data on household composition with external data on fast-food locations."),
-                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added once we have access to the data")),
+                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added later")),
              tabPanel("Conclusion")
   )
 )
