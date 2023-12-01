@@ -6,7 +6,7 @@ library(stringr)
 ################# Augie ###################
 
 # Set the working directory
-setwd('/Users/stanlee/Desktop/Desktop - Sangho’s MacBook Pro/UCSD/Class/2023_Fall/MGTA452-Collecting and Analyzing Large Data/Team Project/mgta452_group_c/Augie/Poverty_Data')
+# setwd('/Users/stanlee/Desktop/Desktop - Sangho’s MacBook Pro/UCSD/Class/2023_Fall/MGTA452-Collecting and Analyzing Large Data/Team Project/mgta452_group_c')
 
 # Directory where your Excel files are stored
 directory <- getwd()

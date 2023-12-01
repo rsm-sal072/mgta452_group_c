@@ -115,7 +115,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   # Define the path to Data.R
-  data_file_path <- "/Users/stanlee/Desktop/Desktop - Sangho’s MacBook Pro/UCSD/Class/2023_Fall/MGTA452-Collecting and Analyzing Large Data/Team Project/mgta452_group_c/Data.R"
+  data_file_path <- "Data.R"
   
   
   
