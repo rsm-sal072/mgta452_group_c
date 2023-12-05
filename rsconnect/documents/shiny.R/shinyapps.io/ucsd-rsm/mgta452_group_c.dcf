@@ -5,7 +5,7 @@ account: ucsd-rsm
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10495146
-bundleId: 7998151
+bundleId: 8009351
 url: https://ucsd-rsm.shinyapps.io/mgta452_group_c/
 version: 1
 asMultiple: FALSE

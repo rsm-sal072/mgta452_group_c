@@ -37,7 +37,12 @@ ui <- fluidPage(
                                             "- This exploration is crucial for understanding the dynamics of various demographic groups and informing policy decisions.",
                                             br(),
                                             br(),
-                                            "- Ultimately, this project seeks to provide a comprehensive understanding of the intricate tapestry of American society as depicted through the lens of the Census data.")
+                                            "- Ultimately, this project seeks to provide a comprehensive understanding of the intricate tapestry of American society as depicted through the lens of the Census data.",
+                                            br(),
+                                            br(),
+                                            "Data Source: The data for this project was sourced from the ",
+                                            a(href = "https://data.census.gov/", "United States Census Bureau's website", target = "_blank"), "."
+                                          )
                                    ),
                                    column(6, 
                                           img(src = "us_census.png", height = "80%", width = "100%"),
@@ -47,87 +52,18 @@ ui <- fluidPage(
                                           )
                                    )
                                  )
-                                 
                         ),
-                        tabPanel("Group C Introduction",
-                                 style = "margin-top: 20px;",
-                                 tags$style(type = "text/css", 
-                                            ".team-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px;}",
-                                            ".team-member {text-align: center;}",
-                                            ".team-member img {height: 200px; width: 200px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;}",
-                                            ".team-member .info h3 {margin: 0; font-size: 20px; font-weight: bold;}",
-                                            ".team-member .info p {font-size: 16px;}"),
-                                 h2("Meet Group C", style = "text-align: center; margin-bottom: 30px;"),
-                                 div(class = "team-grid",
-                                     div(class = "team-member",
-                                         img(src = "Augie.png", alt = "Augie"),
-                                         div(class = "info",
-                                             h3("Augustine Donovan"),
-                                             p("audonovan@ucsd.edu")
-                                         )
-                                     ),
-                                     div(class = "team-member",
-                                         img(src = "Alan.png", alt = "Alan"),
-                                         div(class = "info",
-                                             h3("Alan Shapiro"),
-                                             p("a1shapiro@ucsd.edu")
-                                         )
-                                     ),
-                                     div(class = "team-member",
-                                         img(src = "Robin.png", alt = "Robin"),
-                                         div(class = "info",
-                                             h3("Robin Reese"),
-                                             p("Robin.Reese@rady.ucsd.edu")
-                                         )
-                                     ),
-                                     div(class = "team-member",
-                                         img(src = "Sangho.png", alt = "Sangho"),
-                                         div(class = "info",
-                                             h3("Sangho Lee"),
-                                             p("sal072@ucsd.edu")
-                                         )
-                                     ),
-                                     div(class = "team-member",
-                                         img(src = "Shifali.png", alt = "Shifali"),
-                                         div(class = "info",
-                                             h3("Shefali Sinha"),
-                                             p("s3sinha@ucsd.edu")
-                                         ))))
+                        tabPanel("PPTx",
+                                 tags$iframe(style = "height:1000px; width:100%", src = "ppt.pdf")
+                        )
                         
                         
                       )),
-             tabPanel("Index",
-                      div(class = "index-content", 
-                          tags$style(type = "text/css", 
-                                     ".index-content {text-align: left; margin-top: 20px; font-family: Arial, sans-serif; padding-left: 20px;}",
-                                     ".index-main {font-weight: bold; font-size: 18px; margin-top: 15px;}",
-                                     ".index-sub {margin-left: 20px; font-size: 16px; margin-top: 5px;}"),
-                          h3("Application Index", style = "margin-bottom: 30px; "),
-                          
-                          div(class = "index-main", "Predictive Analysis"),
-                          div(class = "index-sub", "1. Demographic makeup of US cities"),
-                          div(class = "index-sub", "2. Aging population and job market"),
-                          
-                          div(class = "index-main", "Descriptive Analysis"),
-                          div(class = "index-sub", "Introduction: Overview of the data sources and objectives of the descriptive analysis."),
-                          div(class = "index-sub", "Data: Interactive exploration of the dataset with various filters and search options."),
-                          div(class = "index-sub", "Plot (Trend): Visualization of key trends in the data, such as poverty rates and employment patterns."),
-                          div(class = "index-sub", "Plot (Race): Graphical representation comparing racial demographics in the context of poverty and population statistics."),
-                          
-                          div(class = "index-main", "Regression Analysis"),
-                          div(class = "index-sub", "1. Pet ownership and health issues"),
-                          div(class = "index-sub", "2. Fast-food restaurants and single-person households"),
-                          
-                          div(class = "index-main", "Conclusion")
-                      )
-             )
-             ,
-             tabPanel("Predictive Analysis",
-                      h3("** Predictive Analysis **"),
-                      h5("1. *What will be the demographic makeup of major US cities in 10 years?* - Projecting future changes in ethnicity, age distribution, and migration patterns."),
-                      h5("2. *How will the aging population affect the job market by 2030?* - Predicting shifts in employment sectors due to an increasing number of retirees."),
-                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added later")),
-             tabPanel("Descriptive Analysis",
+             
+             tabPanel("Electric Vehicle by States",
+                      h3("Electric Vehicle by States"),
+                      h4("Robin to write up")),
+             tabPanel("Poverty Rate",
                       tabsetPanel(
                         tabPanel("Introduction",
                                  br(),
@@ -172,16 +108,59 @@ ui <- fluidPage(
                       )),
              
              
-             tabPanel("Regression Analysis",
-                      h3("** Regression Analysis **"),
-                      h5("1. *Do states with higher numbers of pet owners have lower stress-related health issues?* - Exploring the correlation between pet ownership (from other sources) and health data from the census."),
-                      h5("2. *Is there a relationship between the number of fast-food restaurants in an area and the number of single-person households?* - Combining census data on household composition with external data on fast-food locations."),
-                      h6("Currently, there are only two bullet points based on Augie's questions. More detailed content and analytical visualizations will be added later")),
-             tabPanel("Conclusion")
+             tabPanel("Migration",
+                      
+                      tabsetPanel(
+                        tabPanel("Introduction",
+                                 h3("Migration Analysis Introduction"),
+                                 h4("Shefali to write up")
+                        ),
+                        tabPanel("Data",
+                               br(),
+                               pickerInput("dataSelector", "Select Data:",
+                                           choices = c("Age Data" = "age_data_df",
+                                                       "Education Data" = "education_data_df",
+                                                       "Gender Data" = "gender_data_df",
+                                                       "Race Data" = "race_data_df")),
+                               DT::dataTableOutput("dataTable"),
+                               downloadButton("downloadSelectedData", "Download Selected Data")
+                        ),
+                        tabPanel("Plots",
+                                 br(),
+                                 pickerInput("plotSelector", "Select Plot:",
+                                             choices = c("Moved within Same County (2012-2022)" = "plot_1",
+                                                         "Moved from Different County, Same State (2012-2022)" = "plot_2",
+                                                         "Moved from Different State (2012-2022)" = "plot_3",
+                                                         "Moved from Abroad (2012-2022)" = "plot_4",
+                                                         "Education - Moved within Same County (2012-2022)" = "plot_5",
+                                                         "Education - Moved from Different County, Same State (2012-2022)" = "plot_6",
+                                                         "Education - Moved from Different State (2012-2022)" = "plot_7",
+                                                         "Education - Moved from Abroad (2012-2022)" = "plot_8",
+                                                         "Gender - Moved within Same County (2012-2022)" = "plot_9",
+                                                         "Gender - Moved from Different County, Same State (2012-2022)" = "plot_10",
+                                                         "Gender - Moved from Different State (2012-2022)" = "plot_11",
+                                                         "Gender - Moved from Abroad (2012-2022)" = "plot_12",
+                                                         "Race - Moved within Same County (2012-2022)" = "plot_13",
+                                                         "Race - Moved from Different County, Same State (2012-2022)" = "plot_14",
+                                                         "Race - Moved from Different State (2012-2022)" = "plot_15",
+                                                         "Race - Moved from Abroad (2012-2022)" = "plot_16")),
+                                 plotOutput("selectedPlot", height = "800px", width = "100%")
+                        )
+                      )
+             )
   )
 )
 
 server <- function(input, output, session) {
+  
+  
+
+
+  
+  
+  
+  
+  
   
   # Define the path to Data.R
   data_file_path <- "Data.R"
@@ -298,6 +277,58 @@ server <- function(input, output, session) {
   
   
   
+  output$dataTable <- DT::renderDataTable({
+    req(input$dataSelector)
+    selectedData <- switch(input$dataSelector,
+                           "age_data_df" = age_data_df,
+                           "education_data_df" = education_data_df,
+                           "gender_data_df" = gender_data_df,
+                           "race_data_df" = race_data_df)
+    DT::datatable(selectedData,
+                  extensions = c("Buttons", "FixedHeader"), 
+                  options = list(pageLength = 50,
+                                 dom = "Blfrtip",
+                                 buttons = c("copy", "csv", "excel"),
+                                 scrollX = TRUE,
+                                 scrollY = "700px",
+                                 fixedHeader = TRUE,
+                                 fixedColumns = list(leftColumns = 2)),
+                  rownames = FALSE) 
+  })
+  
+  
+  
+  
+  
+  output$selectedPlot <- renderPlot({
+    req(input$plotSelector)
+    selectedPlot <- switch(input$plotSelector,
+                           "plot_1" = plot_1,
+                           "plot_2" = plot_2,
+                           "plot_3" = plot_3,
+                           "plot_4" = plot_4,
+                           "plot_5" = plot_5,
+                           "plot_6" = plot_6,
+                           "plot_7" = plot_7,
+                           "plot_8" = plot_8,
+                           "plot_9" = plot_9,
+                           "plot_10" = plot_10,
+                           "plot_11" = plot_11,
+                           "plot_12" = plot_12,
+                           "plot_13" = plot_13,
+                           "plot_14" = plot_14,
+                           "plot_15" = plot_15,
+                           "plot_16" = plot_16)
+    print(selectedPlot)
+  })
+  
+  
+  
+  
+  
+  
+  
+  
   
   output$downloadData <- downloadHandler(
     filename = function() {
@@ -307,6 +338,20 @@ server <- function(input, output, session) {
       write.csv(all_data, file, row.names = FALSE)
     })
   
+  output$downloadSelectedData <- downloadHandler(
+    filename = function() {
+      paste(input$dataSelector, Sys.Date(), ".csv", sep = "-")
+    },
+    content = function(file) {
+      req(input$dataSelector)
+      selectedData <- switch(input$dataSelector,
+                             "age_data_df" = age_data_df,
+                             "education_data_df" = education_data_df,
+                             "gender_data_df" = gender_data_df,
+                             "race_data_df" = race_data_df)
+      write.csv(selectedData, file, row.names = FALSE)
+    })
+ 
   
 }
 

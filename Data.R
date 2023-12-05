@@ -2,6 +2,7 @@ library(readxl)
 library(tidyverse)
 library(scales)
 library(stringr)
+library(RColorBrewer)
 
 ################# Augie ###################
 
@@ -176,3 +177,253 @@ ggplot(melted_data, aes(x = Label, y = Percentage, fill = Type)) +
   scale_fill_brewer(palette = "Pastel1") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+
+
+################### Shefali ####################
+
+# Data 1
+age_data_df <- read_csv('Age_Data.csv')
+
+age_data_df <- as.data.frame(age_data_df)
+age_data_df <- filter(age_data_df, !Age %in% c('1 to 4 years', '5 to 17 years', '75 years and over'))
+
+age_data_df %>% 
+  relocate(Year) %>% 
+  relocate(-Total) -> age_data_df
+
+
+# Data 2
+education_data_df <- read_csv('Education_Data.csv')
+
+education_data_df <- education_data_df %>%
+  mutate(`Education Attainment` = str_trim(`Education Attainment`, side = "both")) %>% 
+  relocate(Year) %>% 
+  relocate(-Total)
+
+
+# Data 3
+gender_data_df <- read_csv('Gender_Data.csv')
+
+gender_data_df <- gender_data_df %>%
+  mutate(Sex = str_trim(Sex, side = "both")) %>% 
+  relocate(Year) %>% 
+  relocate(-Total)
+
+
+# Data 4
+race_data_df <- read_csv('Race_Data.csv')
+
+race_data_df <- race_data_df %>%
+  mutate(Race = str_trim(Race, side = "both")) %>%
+  filter(!Race %in% c('White alone, not Hispanic or Latino', 'Some other race')) %>% 
+  relocate(Year) %>% 
+  relocate(-Total)
+
+
+
+
+
+
+title_size <- 22
+axis_label_size <- 20
+axis_text_size <- 18
+legend_title_size <- 18
+legend_text_size <- 16
+point_size <- 3  # Adjust the point size here
+
+# Define a common theme style
+common_theme <- theme_classic() +
+  theme(
+    legend.title = element_text(face = "bold", size = legend_title_size),
+    legend.text = element_text(face = "bold", size = legend_text_size),
+    axis.title.x = element_text(face = "bold", size = axis_label_size),
+    axis.title.y = element_text(face = "bold", size = axis_label_size),
+    axis.text.x = element_text(face = "bold", size = axis_text_size),
+    axis.text.y = element_text(face = "bold", size = axis_text_size),
+    plot.title = element_text(face = "bold", size = title_size),
+    legend.position = "right"
+  )
+
+# Apply the common style to all plots
+
+# Plot 1
+plot_1 <- ggplot(age_data_df, aes(x = factor(Year), y = `Moved within same county`, group = Age, color = Age)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved within Same County (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Age Group")
+
+# Plot 2
+plot_2 <- ggplot(age_data_df, aes(x = factor(Year), y = `Moved from different county. same state`, group = Age, color = Age)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different County, Same State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Age Group")
+
+# Plot 3
+plot_3 <- ggplot(age_data_df, aes(x = factor(Year), y = `Moved from different state`, group = Age, color = Age)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Age Group")
+
+# Plot 4
+plot_4 <- ggplot(age_data_df, aes(x = factor(Year), y = `Moved from abroad`, group = Age, color = Age)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Abroad (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Age Group")
+
+# Plot 5
+plot_5 <- ggplot(education_data_df, aes(x = factor(Year), y = `Moved within same county`, group = `Education Attainment`, color = `Education Attainment`)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved within Same County (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Education Level")
+
+# Plot 6
+plot_6 <- ggplot(education_data_df, aes(x = factor(Year), y = `Moved from different county. same state`, group = `Education Attainment`, color = `Education Attainment`)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different County, Same State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Education Attainment")
+
+# Plot 7
+plot_7 <- ggplot(education_data_df, aes(x = factor(Year), y = `Moved from different state`, group = `Education Attainment`, color = `Education Attainment`)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Education Attainment")
+
+# Plot 8
+plot_8 <- ggplot(education_data_df, aes(x = factor(Year), y = `Moved from abroad`, group = `Education Attainment`, color = `Education Attainment`)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Abroad (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Education Attainment")
+
+# Plot 9
+plot_9 <- ggplot(gender_data_df, aes(x = factor(Year), y = `Moved within same county`, group = Sex, color = Sex)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved within Same County (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Sex")
+
+# Plot 10
+plot_10 <- ggplot(gender_data_df, aes(x = factor(Year), y = `Moved from different county. same state`, group = Sex, color = Sex)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different County, Same State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Sex")
+
+# Plot 11
+plot_11 <- ggplot(gender_data_df, aes(x = factor(Year), y = `Moved from different state`, group = Sex, color = Sex)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Sex")
+
+# Plot 12
+plot_12 <- ggplot(gender_data_df, aes(x = factor(Year), y = `Moved from abroad`, group = Sex, color = Sex)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Abroad (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Sex")
+
+# Plot 13
+plot_13 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved within same county`, group = Race, color = Race)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved within Same County (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Race")
+
+# Plot 14
+plot_14 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved from different county. same state`, group = Race, color = Race)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different County, Same State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Race")
+
+# Plot 15
+plot_15 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved from different state`, group = Race, color = Race)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Different State (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Race")
+
+# Plot 16
+plot_16 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved from abroad`, group = Race, color = Race)) +
+  geom_line(size = 1.5) +
+  geom_point(size = point_size) +
+  scale_color_brewer(palette = "Dark2") +  
+  ggtitle('Moved from Abroad (2012-2022)') +
+  xlab('Year') +
+  ylab('% Population') +
+  common_theme +
+  labs(color = "Race")
+
+
