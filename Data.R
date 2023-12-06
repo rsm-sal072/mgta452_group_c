@@ -454,7 +454,7 @@ vehicle_type_percentages_long <- gather(vehicle_type_percentages, key = "Vehicle
 
 
 
-robin_plot1 <- ggplot(vehicle_type_percentages_long, aes(x = reorder(Vehicle_Type, Percentage), y = Percentage, fill = Vehicle_Type)) +
+robin_plot1 <- ggplot(vehicle_type_percentages_long, aes(x = reorder(Vehicle_Type, -Percentage), y = Percentage, fill = Vehicle_Type)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = sprintf("%.1f%%", Percentage)), vjust = -0.3, fontface = "bold", color = "black", position = position_dodge(width = 0.9),
             size = 5,  
@@ -468,8 +468,7 @@ robin_plot1 <- ggplot(vehicle_type_percentages_long, aes(x = reorder(Vehicle_Typ
         axis.title.y = element_text(face = "bold", size = 17),
         plot.title = element_text(face = "bold", size = 24, hjust = 0.5)) +
   labs(title = 'Percentage of Total Vehicle Types Relative to Total Number of Vehicles in California',
-       x = 'Vehicle Type', y = 'Percentage (%)') +
-  coord_flip()
+       x = 'Vehicle Type', y = 'Percentage (%)') 
 
 
 
