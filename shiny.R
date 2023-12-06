@@ -15,156 +15,176 @@ ui <- fluidPage(
     "))
   ),
   div(class = "title-style", 
-      tags$h1("MGTA 452 Collecting and Analyzing Large Data", 
-              style = "text-align: center; font-size: 32px; margin-bottom: 30px;")), 
-  h2("US Census Data Analysis Project (Group C)", 
-     style = "text-align: center; font-size: 20px; margin-bottom: 20px;"), 
+      tags$h1("US Census Data Analysis Project (Group C)", 
+              style = "text-align: center; font-size: 32px; margin-bottom: 3px;")), 
+  h2("- MGTA 452 Collecting and Analyzing Large Data -", 
+     style = "text-align: center; font-size: 18px; margin-bottom: 20px;"), 
   div(style = "text-align: right;", 
       tags$img(src = "rady_logo.png", height = 100, width = 430)),
-  navbarPage("",
-             tabPanel("🏠",
-                      tabsetPanel(
-                        tabPanel("Greetings", value = "greetings", uiOutput("greetings"),
-                                 style = "margin-top: 20px;",
-                                 fluidRow(
-                                   column(6,  
-                                          p(style = "font-size: 20px; line-height: 1.6; text-align: justify; font-family: Arial, sans-serif; font-weight: 500;",
-                                            "- In this project, we delve into an in-depth analysis of the US Census data, a rich repository of demographic, social, and economic information.",
-                                            br(), 
-                                            br(),
-                                            "- Our goal is to uncover meaningful insights into the socio-economic landscape of the United States.",
-                                            br(),
-                                            br(),
-                                            "- We aim to explore key trends and patterns related to employment, poverty, and demographic changes.",
-                                            br(),
-                                            br(),
-                                            "- By leveraging advanced analytical techniques, our analysis will not only highlight current socio-economic conditions but also project future trends.",
-                                            br(),
-                                            br(),
-                                            "- This exploration is crucial for understanding the dynamics of various demographic groups and informing policy decisions.",
-                                            br(),
-                                            br(),
-                                            "- Ultimately, this project seeks to provide a comprehensive understanding of the intricate tapestry of American society as depicted through the lens of the Census data.",
-                                            br(),
-                                            br(),
-                                            "Data Source: The data for this project was sourced from the ",
-                                            a(href = "https://data.census.gov/", "United States Census Bureau's website", target = "_blank"), "."
-                                          )
-                                   ),
-                                   column(6, 
-                                          img(src = "us_census.png", height = "80%", width = "100%"),
-                                          p(style = "font-size: 16px; font-family: 'Times New Roman', serif; text-align: center; font-style: italic; margin-top: 10px;",
-                                            "Source: ",
-                                            a(href = "https://policylab.rutgers.edu/uscensus/", "https://policylab.rutgers.edu/uscensus/", target = "_blank")
-                                          )
-                                   )
-                                 )
+  navbarPage(
+    id = "main_nav",
+    "",
+    tabPanel("🏠",
+             tabsetPanel(
+               tabPanel("Greetings", value = "greetings", uiOutput("greetings")),
+               tabPanel("PPTx",
+                        tags$iframe(style = "height:1000px; width:100%", src = "ppt.pdf")
+               )
+               
+               
+             )),
+    
+    tabPanel("Electric Vehicle",
+             tabsetPanel(
+               tabPanel("Analysis", value = "ev", uiOutput("ev")),
+               tabPanel("Data"),
+               tabPanel("Plot")
+             )),
+    
+    tabPanel("Poverty",
+             tabsetPanel(
+               tabPanel("Analysis", value = "poverty", uiOutput("poverty")),
+               tabPanel("Data",
+                        br(),
+                        fluidRow(
+                          column(3, pickerInput("filterReport", "Report", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE))),
+                          column(3, pickerInput("filterCategory", "Category", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE))),
+                          column(3, pickerInput("filterLabel", "Label", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE)))
                         ),
-                        tabPanel("PPTx",
-                                 tags$iframe(style = "height:1000px; width:100%", src = "ppt.pdf")
-                        )
-                        
-                        
-                      )),
+                        DT::dataTableOutput("dataView"),
+                        downloadButton("downloadData", "Download Data")
+               ),
+               tabPanel("Plot (Trend)",
+                        br(),
+                        pickerInput("selectCategory", "Select Category", 
+                                    choices = c("SEX", "AGE", "EDUCATIONAL ATTAINMENT", 
+                                                "EMPLOYMENT STATUS", "WORK EXPERIENCE", 
+                                                "RACE AND HISPANIC OR LATINO ORIGIN")),
+                        plotOutput("trendPlot", height = "800px", width = "100%")),
+               tabPanel("Plot (Race)",
+                        br(),
+                        plotOutput("racePlot", height = "800px", width = "100%")
+               )
+             )),
+    
+    
+    tabPanel("Migration",
              
-             tabPanel("Electric Vehicle by States",
-                      h3("Electric Vehicle by States"),
-                      h4("Robin to write up")),
-             tabPanel("Poverty Rate",
-                      tabsetPanel(
-                        tabPanel("Introduction",
-                                 br(),
-                                 h3("** Descriptive Analysis of Poverty and Employment Data **"),
-                                 h4("This section provides insights into various socioeconomic indicators across different demographic groups.", style = "color: #800000;"),
-                                 h4("1. *Employment Status and Poverty Rates* - Explore the relationship between different employment statuses and poverty rates."),
-                                 h4("2. *Work Experience and Poverty Trends* - Analyze how various levels of work experience correlate with poverty trends."),
-                                 h5(HTML("<i>The analysis leverages data on employment status, work experience, and poverty rates across different demographic categories.</i>"), style = "color: #006400;"),
-                                 br(),
-                                 br(),
-                                 h3("** Trends in Poverty and Employment **"),
-                                 h4("Visualize and analyze trends in poverty rates across different employment statuses and work experiences."),
-                                 h4("Compare these trends over the years to understand how socio-economic factors have evolved."),
-                                 h5(HTML("<i>Interactive visualizations allow for detailed exploration of the data.</i>"), style = "color: #006400;"), 
-                                 br(),
-                                 br(),
-                                 h3("** Race, Population, and Poverty **"),
-                                 h4("Explore the representation of different racial groups in the total population and among those in poverty."),
-                                 h4("This analysis provides a nuanced view of racial disparities in socioeconomic status."),
-                                 h5(HTML("<i>Data visualizations highlight the differences in percentage representation across racial groups.</i>"), style = "color: #006400;")),
-                        tabPanel("Data",
-                                 br(),
-                                 fluidRow(
-                                   column(3, pickerInput("filterReport", "Report", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE))),
-                                   column(3, pickerInput("filterCategory", "Category", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE))),
-                                   column(3, pickerInput("filterLabel", "Label", choices = NULL, multiple = TRUE, options = list(`actions-box` = TRUE)))
-                                 ),
-                                 DT::dataTableOutput("dataView"),
-                                 downloadButton("downloadData", "Download Data")
-                        ),
-                        tabPanel("Plot (Trend)",
-                                 br(),
-                                 pickerInput("selectCategory", "Select Category", 
-                                             choices = c("SEX", "AGE", "EDUCATIONAL ATTAINMENT", 
-                                                         "EMPLOYMENT STATUS", "WORK EXPERIENCE", 
-                                                         "RACE AND HISPANIC OR LATINO ORIGIN")),
-                                 plotOutput("trendPlot", height = "800px", width = "100%")),
-                        tabPanel("Plot (Race)",
-                                 br(),
-                                 plotOutput("racePlot", height = "800px", width = "100%")
-                        )
-                      )),
-             
-             
-             tabPanel("Migration",
-                      
-                      tabsetPanel(
-                        tabPanel("Introduction",
-                                 h3("Migration Analysis Introduction"),
-                                 h4("Shefali to write up")
-                        ),
-                        tabPanel("Data",
-                               br(),
-                               pickerInput("dataSelector", "Select Data:",
-                                           choices = c("Age Data" = "age_data_df",
-                                                       "Education Data" = "education_data_df",
-                                                       "Gender Data" = "gender_data_df",
-                                                       "Race Data" = "race_data_df")),
-                               DT::dataTableOutput("dataTable"),
-                               downloadButton("downloadSelectedData", "Download Selected Data")
-                        ),
-                        tabPanel("Plots",
-                                 br(),
-                                 pickerInput("plotSelector", "Select Plot:",
-                                             choices = c("Moved within Same County (2012-2022)" = "plot_1",
-                                                         "Moved from Different County, Same State (2012-2022)" = "plot_2",
-                                                         "Moved from Different State (2012-2022)" = "plot_3",
-                                                         "Moved from Abroad (2012-2022)" = "plot_4",
-                                                         "Education - Moved within Same County (2012-2022)" = "plot_5",
-                                                         "Education - Moved from Different County, Same State (2012-2022)" = "plot_6",
-                                                         "Education - Moved from Different State (2012-2022)" = "plot_7",
-                                                         "Education - Moved from Abroad (2012-2022)" = "plot_8",
-                                                         "Gender - Moved within Same County (2012-2022)" = "plot_9",
-                                                         "Gender - Moved from Different County, Same State (2012-2022)" = "plot_10",
-                                                         "Gender - Moved from Different State (2012-2022)" = "plot_11",
-                                                         "Gender - Moved from Abroad (2012-2022)" = "plot_12",
-                                                         "Race - Moved within Same County (2012-2022)" = "plot_13",
-                                                         "Race - Moved from Different County, Same State (2012-2022)" = "plot_14",
-                                                         "Race - Moved from Different State (2012-2022)" = "plot_15",
-                                                         "Race - Moved from Abroad (2012-2022)" = "plot_16")),
-                                 plotOutput("selectedPlot", height = "800px", width = "100%")
-                        )
-                      )
+             tabsetPanel(
+               tabPanel("Analysis", value = "migratin", uiOutput("migration")),
+               tabPanel("Data",
+                        br(),
+                        pickerInput("dataSelector", "Select Data:",
+                                    choices = c("Age Data" = "age_data_df",
+                                                "Education Data" = "education_data_df",
+                                                "Gender Data" = "gender_data_df",
+                                                "Race Data" = "race_data_df")),
+                        DT::dataTableOutput("dataTable"),
+                        downloadButton("downloadSelectedData", "Download Selected Data")
+               ),
+               tabPanel("Plots",
+                        br(),
+                        pickerInput("plotSelector", "Select Plot:",
+                                    choices = c("Moved within Same County (2012-2022)" = "plot_1",
+                                                "Moved from Different County, Same State (2012-2022)" = "plot_2",
+                                                "Moved from Different State (2012-2022)" = "plot_3",
+                                                "Moved from Abroad (2012-2022)" = "plot_4",
+                                                "Education - Moved within Same County (2012-2022)" = "plot_5",
+                                                "Education - Moved from Different County, Same State (2012-2022)" = "plot_6",
+                                                "Education - Moved from Different State (2012-2022)" = "plot_7",
+                                                "Education - Moved from Abroad (2012-2022)" = "plot_8",
+                                                "Gender - Moved within Same County (2012-2022)" = "plot_9",
+                                                "Gender - Moved from Different County, Same State (2012-2022)" = "plot_10",
+                                                "Gender - Moved from Different State (2012-2022)" = "plot_11",
+                                                "Gender - Moved from Abroad (2012-2022)" = "plot_12",
+                                                "Race - Moved within Same County (2012-2022)" = "plot_13",
+                                                "Race - Moved from Different County, Same State (2012-2022)" = "plot_14",
+                                                "Race - Moved from Different State (2012-2022)" = "plot_15",
+                                                "Race - Moved from Abroad (2012-2022)" = "plot_16")),
+                        plotOutput("selectedPlot", height = "800px", width = "100%")
+               )
              )
+    )
   )
 )
 
+
+
+
+
 server <- function(input, output, session) {
   
+  active_tab <- reactiveVal("greetings")
+  active_tab_2 <- reactiveVal("poverty")
+  active_tab_3 <- reactiveVal("migration")
+  active_tab_4 <- reactiveVal("ev")
   
-
-
   
   
+  ################################################## Greetings ##################################################
+  observeEvent(input$main_nav, {
+    if(input$main_nav == "greetings") {
+      rendered_html <- rmarkdown::render("greetings.Rmd", output_dir = "www", output_file = "greetings.html")
+      
+      active_tab(input$main_nav)
+    }
+  })
+  
+  output$greetings <- renderUI({
+    if (active_tab() == "greetings") {
+      tags$iframe(src = "greetings.html", style = "width:100%; height:600px;")
+    }
+  })
+  
+  
+  ################################################## Poverty ##################################################
+  observeEvent(input$main_nav, {
+    if(input$main_nav == "poverty") {
+      rendered_html <- rmarkdown::render("poverty.Rmd", output_dir = "www", output_file = "poverty.html")
+      
+      active_tab(input$main_nav)
+    }
+  })
+  
+  output$poverty <- renderUI({
+    if (active_tab_2() == "poverty") {
+      tags$iframe(src = "poverty.html", style = "width:100%; height:600px;")
+    }
+  })
+  
+  ################################################## Migration ##################################################
+  observeEvent(input$main_nav, {
+    if(input$main_nav == "migration") {
+      rendered_html <- rmarkdown::render("migration.Rmd", output_dir = "www", output_file = "migration.html")
+      
+      active_tab(input$main_nav)
+    }
+  })
+  
+  output$migration <- renderUI({
+    if (active_tab_3() == "migration") {
+      tags$iframe(src = "migration.html", style = "width:100%; height:600px;")
+    }
+  })
+  
+  ################################################## EV ##################################################
+  observeEvent(input$main_nav, {
+    if(input$main_nav == "ev") {
+      rendered_html <- rmarkdown::render("ev.Rmd", output_dir = "www", output_file = "ev.html")
+      
+      active_tab(input$main_nav)
+    }
+  })
+  
+  output$ev <- renderUI({
+    if (active_tab_4() == "ev") {
+      tags$iframe(src = "ev.html", style = "width:100%; height:600px;")
+    }
+  })
+  
+  
+  
+  #################################################################################################################################################
   
   
   
@@ -358,7 +378,7 @@ server <- function(input, output, session) {
                              "race_data_df" = race_data_df)
       write.csv(selectedData, file, row.names = FALSE)
     })
- 
+  
   
 }
 

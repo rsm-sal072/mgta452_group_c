@@ -6,10 +6,6 @@ library(RColorBrewer)
 
 ################# Augie ###################
 
-# Set the working directory
-# setwd('/Users/stanlee/Desktop/Desktop - Sangho’s MacBook Pro/UCSD/Class/2023_Fall/MGTA452-Collecting and Analyzing Large Data/Team Project/mgta452_group_c')
-
-# Directory where your Excel files are stored
 directory <- getwd()
 
 # Main categories
@@ -425,5 +421,14 @@ plot_16 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved from abroad`, g
   ylab('% Population') +
   common_theme +
   labs(color = "Race")
+
+
+
+
+
+
+
+################# Robin ###################
+
 
 
