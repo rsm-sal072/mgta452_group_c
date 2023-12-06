@@ -3,6 +3,8 @@ library(tidyverse)
 library(scales)
 library(stringr)
 library(RColorBrewer)
+library(sf)
+library(viridis)
 
 ################# Augie ###################
 
@@ -430,14 +432,44 @@ plot_16 <- ggplot(race_data_df, aes(x = factor(Year), y = `Moved from abroad`, g
 
 ################# Robin ###################
 
+# Read Data
+shapefile <- readRDS("shapefile.rds")
+df_robin <- read_csv("ev-zipcode-demographics.csv")
 
 
 
+# robin_plot1
+vehicle_types <- c('Diesel', 'Electric', 'Flex_Fuel', 'Gasoline', 'Gasoline_Hybrid', 
+                   'Hydrogen', 'Natural_Gas', 'PHEV', 'Propane')
+
+total_vehicles_by_type <- df_robin %>% 
+  select(all_of(vehicle_types)) %>% 
+  summarise_all(sum)
+
+total_vehicles <- sum(total_vehicles_by_type)
+
+vehicle_type_percentages <- total_vehicles_by_type / total_vehicles * 100
+
+vehicle_type_percentages_long <- gather(vehicle_type_percentages, key = "Vehicle_Type", value = "Percentage") 
 
 
 
-
-
+robin_plot1 <- ggplot(vehicle_type_percentages_long, aes(x = reorder(Vehicle_Type, Percentage), y = Percentage, fill = Vehicle_Type)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f%%", Percentage)), vjust = -0.3, fontface = "bold", color = "black", position = position_dodge(width = 0.9),
+            size = 5,  
+            fontface = "bold") +
+  scale_fill_brewer(palette = "Dark2") +  
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(face = "bold", size = 15, angle = 45, hjust = 1),
+        axis.text.y = element_text(face = "bold", size = 15),
+        axis.title.x = element_text(face = "bold", size = 17),
+        axis.title.y = element_text(face = "bold", size = 17),
+        plot.title = element_text(face = "bold", size = 24, hjust = 0.5)) +
+  labs(title = 'Percentage of Total Vehicle Types Relative to Total Number of Vehicles in California',
+       x = 'Vehicle Type', y = 'Percentage (%)') +
+  coord_flip()
 
 
 

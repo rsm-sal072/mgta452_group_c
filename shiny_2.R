@@ -37,8 +37,29 @@ ui <- fluidPage(
     tabPanel("Electric Vehicle",
              tabsetPanel(
                tabPanel("Analysis", value = "ev", uiOutput("ev")),
-               tabPanel("Data"),
-               tabPanel("Plot")
+               tabPanel("Data",
+                        br(),
+                        pickerInput("dataSelector_2", "Select Data:",
+                                    choices = c("Usage by Zip" = "df_robin",
+                                                "Geographic Data" = "shapefile")),
+                        DT::dataTableOutput("dataTableEV"),
+                        downloadButton("downloadevData", "Download Selected Data")
+               ),
+               tabPanel("Bar Plot",
+                        br(),
+                        plotOutput("robin_bar", height = "800px", width = "100%")),
+               tabPanel("Heat Map",
+                        br(),
+                        img(src = "heatmap.png", height = "1000px", width = "60%")),
+               tabPanel("Pie Chart",
+                        br(),
+                        pickerInput("imageSelector", "Choose Pie Chart", choices = c("% in California" = "pie1.png", "% in San Diego" = "pie2.png")),
+                        br(),
+                        br(),
+                        imageOutput("selectedImage")),
+               tabPanel("Scatter Plots",
+                        br(),
+                        img(src = "scatter.png", height = "1600px", width = "95%"))
              )),
     
     tabPanel("Poverty",
@@ -60,10 +81,10 @@ ui <- fluidPage(
                                     choices = c("SEX", "AGE", "EDUCATIONAL ATTAINMENT", 
                                                 "EMPLOYMENT STATUS", "WORK EXPERIENCE", 
                                                 "RACE AND HISPANIC OR LATINO ORIGIN")),
-                        plotOutput("trendPlot", height = "800px", width = "100%")),
+                        plotOutput("trendPlot", height = "500px", width = "100%")),
                tabPanel("Plot (Race)",
                         br(),
-                        plotOutput("racePlot", height = "800px", width = "100%")
+                        plotOutput("racePlot", height = "500px", width = "100%")
                )
              )),
              
@@ -101,7 +122,7 @@ ui <- fluidPage(
                                                 "Race - Moved from Different County, Same State (2012-2022)" = "plot_14",
                                                 "Race - Moved from Different State (2012-2022)" = "plot_15",
                                                 "Race - Moved from Abroad (2012-2022)" = "plot_16")),
-                        plotOutput("selectedPlot", height = "800px", width = "100%")
+                        plotOutput("selectedPlot", height = "500px", width = "100%")
                )
              )
     )
@@ -187,7 +208,7 @@ server <- function(input, output, session) {
   #################################################################################################################################################
   
   
-  
+  ############################### Augie ##############################
   
   # Define the path to Data.R
   data_file_path <- "Data.R"
@@ -301,7 +322,7 @@ server <- function(input, output, session) {
     
   })
   
-  
+  ############################### Shefali ##############################
   
   
   output$dataTable <- DT::renderDataTable({
@@ -350,11 +371,44 @@ server <- function(input, output, session) {
   })
   
   
+  ############################### Robin ##############################
+  
+  output$dataTableEV <- DT::renderDataTable({
+    req(input$dataSelector_2)
+    selectedData_2 <- switch(input$dataSelector_2,
+                           "df_robin" = df_robin,
+                           "shapefile" = shapefile)
+    DT::datatable(selectedData_2,
+                  extensions = c("Buttons", "FixedHeader"), 
+                  options = list(pageLength = 50,
+                                 dom = "Blfrtip",
+                                 buttons = c("copy", "csv", "excel"),
+                                 scrollX = TRUE,
+                                 scrollY = "700px",
+                                 fixedHeader = TRUE,
+                                 fixedColumns = list(leftColumns = 2)),
+                  rownames = FALSE) 
+  })
   
   
   
+  output$robin_bar <- renderPlot({
+    robin_plot1
+    
+  })
   
   
+  output$selectedImage <- renderImage({
+    req(input$imageSelector)
+    
+    list(src = input$imageSelector,
+         contentType = ifelse(grepl("\\.png$", input$imageSelector), "image/png", "image/jpeg"),
+         width = "45%",
+         height = "700px")
+  }, deleteFile = FALSE)
+  
+  
+  ################################################################################################################################################
   
   
   output$downloadData <- downloadHandler(
@@ -364,6 +418,8 @@ server <- function(input, output, session) {
     content = function(file) {
       write.csv(all_data, file, row.names = FALSE)
     })
+  
+  
   
   output$downloadSelectedData <- downloadHandler(
     filename = function() {
@@ -377,6 +433,20 @@ server <- function(input, output, session) {
                              "gender_data_df" = gender_data_df,
                              "race_data_df" = race_data_df)
       write.csv(selectedData, file, row.names = FALSE)
+    })
+  
+  
+  
+  output$downloadevData <- downloadHandler(
+    filename = function() {
+      paste(input$dataSelector_2, Sys.Date(), ".csv", sep = "-")
+    },
+    content = function(file) {
+      req(input$dataSelector_2)
+      selectedData_2 <- switch(input$dataSelector_2,
+                             "df_robin" = df_robin,
+                             "shapefile" = shapefile)
+      write.csv(selectedData_2, file, row.names = FALSE)
     })
   
   
