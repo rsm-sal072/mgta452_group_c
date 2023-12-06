@@ -27,7 +27,7 @@ ui <- fluidPage(
     tabPanel("🏠",
              tabsetPanel(
                tabPanel("Greetings", value = "greetings", uiOutput("greetings")),
-               tabPanel("PPTx",
+               tabPanel("Overview",
                         tags$iframe(style = "height:1000px; width:100%", src = "ppt.pdf")
                )
                
