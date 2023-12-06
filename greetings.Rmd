@@ -1,0 +1,58 @@
+---
+title: " "
+output:
+  html_document:
+  css: styles.css
+---
+  
+```{css, echo=FALSE}
+body {
+  font-family: 'Verdana', sans-serif;
+  font-size: 1.9em; 
+}
+
+#footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #f2f2f2; 
+  color: black; /* Text color */
+  text-align: center;
+padding: 10px 0;
+font-size: 0.9em;
+}
+
+```
+
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+
+  
+Welcome to our Advanced Explorative Data Analysis Project, featuring the comprehensive US Census data. 
+In this project, our objective is to extract and present profound insights into the United States' socio-economic framework. 
+
+<br>
+<br>
+
+
+For discussions, feedback, or inquiries, please feel free to contact us via email. We can be reached at:
+
+- Augustine Donovan: [audonovan\@ucsd.edu](mailto:audonovan@ucsd.edu)  
+- Robin Reese: [roreese\@ucsd.edu](mailto:roreese@ucsd.edu)
+- Sangho Lee: [sal072\@ucsd.edu](mailto:sal072@ucsd.edu)
+- Shefali Sinha: [s3sinha\@ucsd.edu](mailto:s3sinha@ucsd.edu)
+
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+
+
+::: {#footer}
+```         
+  Copyright © 2023 by Augustine Donovan, Robin Reese, Sangho Lee, Shefali Sinha, the UCSD MSBA 2023 Cohort Project Group C from Rady School of Management, All rights reserved.
+  
+```
+:::
+    

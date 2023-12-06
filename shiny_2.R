@@ -21,45 +21,12 @@ ui <- fluidPage(
      style = "text-align: center; font-size: 20px; margin-bottom: 20px;"), 
   div(style = "text-align: right;", 
       tags$img(src = "rady_logo.png", height = 100, width = 430)),
-  navbarPage("",
+  navbarPage(
+    id = "main_nav",
+    "",
              tabPanel("🏠",
                       tabsetPanel(
-                        tabPanel("Greetings", value = "greetings", uiOutput("greetings"),
-                                 style = "margin-top: 20px;",
-                                 fluidRow(
-                                   column(6,  
-                                          p(style = "font-size: 20px; line-height: 1.6; text-align: justify; font-family: Arial, sans-serif; font-weight: 500;",
-                                            "- In this project, we delve into an in-depth analysis of the US Census data, a rich repository of demographic, social, and economic information.",
-                                            br(), 
-                                            br(),
-                                            "- Our goal is to uncover meaningful insights into the socio-economic landscape of the United States.",
-                                            br(),
-                                            br(),
-                                            "- We aim to explore key trends and patterns related to employment, poverty, and demographic changes.",
-                                            br(),
-                                            br(),
-                                            "- By leveraging advanced analytical techniques, our analysis will not only highlight current socio-economic conditions but also project future trends.",
-                                            br(),
-                                            br(),
-                                            "- This exploration is crucial for understanding the dynamics of various demographic groups and informing policy decisions.",
-                                            br(),
-                                            br(),
-                                            "- Ultimately, this project seeks to provide a comprehensive understanding of the intricate tapestry of American society as depicted through the lens of the Census data.",
-                                            br(),
-                                            br(),
-                                            "Data Source: The data for this project was sourced from the ",
-                                            a(href = "https://data.census.gov/", "United States Census Bureau's website", target = "_blank"), "."
-                                          )
-                                   ),
-                                   column(6, 
-                                          img(src = "us_census.png", height = "80%", width = "100%"),
-                                          p(style = "font-size: 16px; font-family: 'Times New Roman', serif; text-align: center; font-style: italic; margin-top: 10px;",
-                                            "Source: ",
-                                            a(href = "https://policylab.rutgers.edu/uscensus/", "https://policylab.rutgers.edu/uscensus/", target = "_blank")
-                                          )
-                                   )
-                                 )
-                        ),
+                        tabPanel("Greetings", value = "greetings", uiOutput("greetings")),
                         tabPanel("PPTx",
                                  tags$iframe(style = "height:1000px; width:100%", src = "ppt.pdf")
                         )
@@ -123,14 +90,14 @@ ui <- fluidPage(
                                  h4("Shefali to write up")
                         ),
                         tabPanel("Data",
-                               br(),
-                               pickerInput("dataSelector", "Select Data:",
-                                           choices = c("Age Data" = "age_data_df",
-                                                       "Education Data" = "education_data_df",
-                                                       "Gender Data" = "gender_data_df",
-                                                       "Race Data" = "race_data_df")),
-                               DT::dataTableOutput("dataTable"),
-                               downloadButton("downloadSelectedData", "Download Selected Data")
+                                 br(),
+                                 pickerInput("dataSelector", "Select Data:",
+                                             choices = c("Age Data" = "age_data_df",
+                                                         "Education Data" = "education_data_df",
+                                                         "Gender Data" = "gender_data_df",
+                                                         "Race Data" = "race_data_df")),
+                                 DT::dataTableOutput("dataTable"),
+                                 downloadButton("downloadSelectedData", "Download Selected Data")
                         ),
                         tabPanel("Plots",
                                  br(),
@@ -161,9 +128,24 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   
-
-
   
+  
+  ################################################## Greetings ##################################################
+  observeEvent(input$main_nav, {
+    if(input$main_nav == "greetings") {
+      rendered_html <- rmarkdown::render("greetings.Rmd", output_dir = "www", output_file = "greetings.html")
+      
+      active_tab(input$main_nav)
+    }
+  })
+  
+  output$greetings <- renderUI({
+    if (active_tab() == "greetings") {
+      tags$iframe(src = "greetings.html", style = "width:100%; height:800px;")
+    }
+  })
+  
+  active_tab <- reactiveVal("greetings")
   
   
   
@@ -358,7 +340,7 @@ server <- function(input, output, session) {
                              "race_data_df" = race_data_df)
       write.csv(selectedData, file, row.names = FALSE)
     })
- 
+  
   
 }
 

@@ -1,0 +1,37 @@
+---
+title: " "
+output:
+  html_document:
+  css: styles.css
+---
+  
+```{css, echo=FALSE}
+body {
+  font-family: 'Verdana', sans-serif;
+  font-size: 1.9em; 
+}
+
+
+```
+
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+
+  
+# Analysis
+- California demographic data supplemented with vehicle populations by fuel type via the California Energy Commission and Zillow Home Value Index
+
+<br>
+<br>
+
+# What We Found
+- EV adoption rates remain fairly low within California
+- Drivers of electric vehicles are found almost exclusively within the largest population centers in the state
+- Within many of the most populous zip codes ownership rates remain low
+- Strong correlation toward adoption in zip codes where single-family home values and household income are highest
+
+
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
