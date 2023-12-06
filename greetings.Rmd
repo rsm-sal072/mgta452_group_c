@@ -52,7 +52,6 @@ For discussions, feedback, or inquiries, please feel free to contact us via emai
 ::: {#footer}
 ```         
   Copyright © 2023 by Augustine Donovan, Robin Reese, Sangho Lee, Shefali Sinha, the UCSD MSBA 2023 Cohort Project Group C from Rady School of Management, All rights reserved.
-  
 ```
 :::
     
