@@ -403,7 +403,7 @@ server <- function(input, output, session) {
     
     list(src = input$imageSelector,
          contentType = ifelse(grepl("\\.png$", input$imageSelector), "image/png", "image/jpeg"),
-         width = "45%",
+         width = "46.5%",
          height = "700px")
   }, deleteFile = FALSE)
   
