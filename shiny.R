@@ -84,7 +84,7 @@ ui <- fluidPage(
                         plotOutput("trendPlot", height = "500px", width = "100%")),
                tabPanel("Plot (Race)",
                         br(),
-                        plotOutput("racePlot", height = "500px", width = "100%")
+                        plotOutput("racePlot", height = "800px", width = "100%")
                )
              )),
     
@@ -153,7 +153,7 @@ server <- function(input, output, session) {
   
   output$greetings <- renderUI({
     if (active_tab() == "greetings") {
-      tags$iframe(src = "greetings.html", style = "width:100%; height:600px;")
+      tags$iframe(src = "greetings.html", style = "width:100%; height:1200px;")
     }
   })
   
@@ -169,7 +169,7 @@ server <- function(input, output, session) {
   
   output$poverty <- renderUI({
     if (active_tab_2() == "poverty") {
-      tags$iframe(src = "poverty.html", style = "width:100%; height:600px;")
+      tags$iframe(src = "poverty.html", style = "width:100%; height:1200px;")
     }
   })
   
@@ -184,7 +184,7 @@ server <- function(input, output, session) {
   
   output$migration <- renderUI({
     if (active_tab_3() == "migration") {
-      tags$iframe(src = "migration.html", style = "width:100%; height:600px;")
+      tags$iframe(src = "migration.html", style = "width:100%; height:1200px;")
     }
   })
   
@@ -199,7 +199,7 @@ server <- function(input, output, session) {
   
   output$ev <- renderUI({
     if (active_tab_4() == "ev") {
-      tags$iframe(src = "ev.html", style = "width:100%; height:600px;")
+      tags$iframe(src = "ev.html", style = "width:100%; height:1200px;")
     }
   })
   
@@ -317,7 +317,7 @@ server <- function(input, output, session) {
         axis.title.x = element_text(size = 17, face = "bold"),
         axis.title.y = element_text(size = 17, face = "bold"),
         legend.text = element_text(size = 15, face = "bold"),
-        plot.title = element_text(size = 24, face = "bold", hjust = 0.5)
+        plot.title = element_text(size = 20, face = "bold", hjust = 0.5)
       )
     
   })

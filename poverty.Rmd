@@ -4,7 +4,7 @@ output:
   html_document:
   css: styles.css
 ---
-  
+
 ```{css, echo=FALSE}
 body {
   font-family: 'Verdana', sans-serif;
@@ -14,26 +14,26 @@ body {
 
 ```
 
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-  
+![](www/poverty.png)
+
 # Analysis
-- Estimates for the past ten years broken out by Age, Sex, Race
-- Employment Status & Work Experience
 
-<br>
-<br>
+-   Estimates for the past ten years broken out by Age, Sex, Race
+-   Employment Status & Work Experience
+
+<br> <br>
 
 # What We Found
-- U.S. Census data from the past decade highlights a strong link between education and poverty
-- with college graduates facing a significantly lower poverty rate of around 4% compared to nearly 24% for those without a high school diploma
-- Gender disparities are evident, with males generally experiencing lower poverty rates than females
-- Racially, African Americans, Hispanics, and Native Americans have seen a decline in poverty rates mirrored by a decrease in childhood poverty
-from 22% to 16%
 
+-   U.S. Census data from the past decade highlights a strong link between education and poverty
+-   with college graduates facing a significantly lower poverty rate of around 4% compared to nearly 24% for those without a high school diploma
+-   Gender disparities are evident, with males generally experiencing lower poverty rates than females
+-   Racially, African Americans, Hispanics, and Native Americans have seen a decline in poverty rates mirrored by a decrease in childhood poverty from 22% to 16%
 
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
------------------------------------------------------------------------
+------------------------------------------------------------------------
